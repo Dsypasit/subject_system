@@ -1,11 +1,12 @@
 class Subject:
-
+    # defined initial attribute
     def __init__(self, name, time, teacher_name, link):
         self.name = name
         self.time = time
         self.teacher_name = teacher_name
         self.link = link
 
+    # set subject name
     def set_name(self, name):
         self.name = name
 
