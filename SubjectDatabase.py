@@ -1,9 +1,9 @@
 import mysql.connector
 class Database:
     def __init__(self):
-        self._host = "localhost"
-        self._username = admin
-        self._password = 1234
+        self._host = "mysqldb"
+        self._username = "root"
+        self._password = "1234"
 
     def create_database(self):
         db = mysql.connector.connect(
@@ -94,4 +94,19 @@ class Database:
         db.close()
         return result
 
+    def check_connection(self):
+        db = mysql.connector.connect(
+                host=self._host,
+                user=self._username,
+                password=self._password
+                )
+        if (db.is_connected()):
+            print("Connected")
+        else:
+            print("Not connected")
+        db.close()
 
+if __name__ == "__main__":
+    db = Database()
+    while True:
+        db.check_connection()
