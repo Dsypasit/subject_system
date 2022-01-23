@@ -6,6 +6,7 @@ class Subject:
         self.teacher_name = teacher_name
         self.link = link
 
+    # set subject name
     def set_name(self, name):
         self.name = name
 
