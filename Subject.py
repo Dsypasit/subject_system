@@ -1,5 +1,5 @@
 class Subject:
-
+    # defined initial attribute
     def __init__(self, name, time, teacher_name, link):
         self.name = name
         self.time = time
