@@ -2,10 +2,10 @@ FROM python:3.7-alpine
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
+ADD requirements.txt requirements.txt
 
 RUN pip3 install -r requirements.txt
 
-COPY . .
+ADD . .
 
-CMD ["python3", "SubjectDatabase.py"]
+CMD ["python3", "SubjectManager.py"]

@@ -2,8 +2,11 @@ version: '3.8'
 
 services:
   app:
-    build:
-      context: .
+    image: dsypasit/subject_system
+    depends_on:
+      - mysqldb
+    #build:
+      #context: test/
     volumes:
       - ./:/app
 
