@@ -29,8 +29,3 @@ class SubjectManager:
 if __name__ == "__main__":
     manager = SubjectManager()
     manager.send_email("Digital and analog", "sopon", "www.youtube.com", "12:00")
-    a = 0
-    while True:
-        a+=1
-        print(a)
-        time.sleep(0.5)

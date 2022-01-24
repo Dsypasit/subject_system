@@ -1,4 +1,5 @@
 import mysql.connector
+from mysql.connector import errorcode
 class Database:
     def __init__(self):
         self._host = "mysqldb"
@@ -6,34 +7,47 @@ class Database:
         self._password = "1234"
 
     def create_database(self):
-        db = mysql.connector.connect(
-                host=self._host,
-                user=self._username,
-                password=self._password
-                )
-        cursor = db.cursor()
-        cursor.execute("CREATE DATABASE subject_system")
-        cursor.close()
-        db.close()
+        try:
+            db = mysql.connector.connect(
+                    host=self._host,
+                    user=self._username,
+                    password=self._password
+                    )
+            cursor = db.cursor()
+            cursor.execute("CREATE DATABASE subject_system")
+            cursor.close()
+            db.close()
+            print("Create database completed!")
+        except mysql.connector.Error as err:
+            print("Failed creating database: {}".format(err))
+
 
     def create_table(self):
-        db = mysql.connector.connect(
-                host=self._host,
-                user=self._username,
-                password=self._password,
-                database="subject_system"
-                )
-        cursor = db.cursor()
-        cursor.execute("""
-            CREATE TABLE subjects (
-            Id int NOT NULL AUTO_INCREMENT,
-            SubjectName VARCHAR(100), 
-            Time time(0),
-            Teacher VARCHAR(255),
-            Link VARCHAR(255))
-        """)
-        cursor.close()
-        db.close()
+        try:
+            db = mysql.connector.connect(
+                    host=self._host,
+                    user=self._username,
+                    password=self._password,
+                    database="subject_system"
+                    )
+            cursor = db.cursor()
+            cursor.execute("""
+                CREATE TABLE subjects (
+                Id int AUTO_INCREMENT primary key NOT NULL ,
+                SubjectName VARCHAR(100), 
+                Time time(0),
+                Teacher VARCHAR(255),
+                Link VARCHAR(255))
+            """)
+            cursor.close()
+            db.close()
+            print("Create table completed!")
+        except mysql.connector.Error as err:
+            if err.errno== errorcode.ER_TABLE_EXISTS_ERROR:
+                print("already exists.")
+            else:
+                print(err.msg) 
+
 
     def insert_subject(self, name, time, teacher, link):
         db = mysql.connector.connect(
@@ -108,5 +122,8 @@ class Database:
 
 if __name__ == "__main__":
     db = Database()
+    db.check_connection()
+    db.create_database()
+    db.create_table()
     while True:
-        db.check_connection()
+        pass
