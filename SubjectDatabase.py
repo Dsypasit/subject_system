@@ -58,7 +58,7 @@ class Database:
                 database="subject_system"
                 )
         cursor = db.cursor()
-        sql = "INSERT INTO subjects(SubjectName, Time, Teacher, Link) VALUES(%s, %s, %s, %s, %s)"
+        sql = "INSERT INTO subjects(SubjectName, Date, Time, Teacher, Link) VALUES(%s, %s, %s, %s, %s)"
         val = (name , date, time, teacher, link)
         cursor.execute(sql, val)
         db.commit()
