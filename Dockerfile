@@ -8,4 +8,4 @@ RUN pip3 install -r requirements.txt
 
 ADD . .
 
-CMD ["python3", "SubjectManager.py"]
+CMD ["python3", "-u","SubjectDatabase.py"]

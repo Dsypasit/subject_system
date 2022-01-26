@@ -2,13 +2,15 @@ version: '3.8'
 
 services:
   app:
-    image: dsypasit/subject_system
+    #image: dsypasit/subject_system
     depends_on:
       - mysqldb
-    #build:
-      #context: test/
+    build:
+      context: .
     volumes:
       - ./:/app
+    environment:
+      - PYTHONUNBUFFERED=1
 
   mysqldb:
     image: mysql
